@@ -307,7 +307,12 @@ export default {
           createWage(this.wage).then(res => {
             this.loading = false;
             if (res && res.code === 200) {
-              this.$confirm("是否继续创建工资条?", "提示", {
+               this.$message({
+                showClose: true,
+                message: "创建成功",
+                type: "success"
+              });
+              this.$confirm("创建成功，是否继续创建工资条?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"

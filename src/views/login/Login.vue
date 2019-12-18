@@ -1,25 +1,27 @@
 <template>
-  <div class="login-container">
-    <el-form
-      :model="user"
-      :rules="rules"
-      status-icon
-      ref="user"
-      label-position="left"
-      label-width="0px"
-      class="demo-ruleForm login-page"
-    >
-      <h3 class="title">系统登录</h3>
-      <el-form-item prop="username">
-        <el-input type="text" v-model="user.username" auto-complete="off" placeholder="用户名"></el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input type="password" v-model="user.password" auto-complete="off" placeholder="密码"></el-input>
-      </el-form-item>
-      <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录</el-button>
-      </el-form-item>
-    </el-form>
+  <div>
+    <div class="login-container">
+      <el-form
+        :model="user"
+        :rules="rules"
+        status-icon
+        ref="user"
+        label-position="left"
+        label-width="0px"
+        class="demo-ruleForm login-page"
+      >
+        <h3 class="title">系统登录</h3>
+        <el-form-item prop="username">
+          <el-input type="text" v-model="user.username" auto-complete="off" placeholder="用户名"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input type="password" v-model="user.password" auto-complete="off" placeholder="密码"></el-input>
+        </el-form-item>
+        <el-form-item style="width:100%;">
+          <el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -78,13 +80,20 @@ export default {
 
 <style scoped>
 .login-container {
-  width: 100%;
-  height: 100%;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 .login-page {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin: auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  margin: 180px auto;
   width: 350px;
   padding: 35px 35px 15px;
   background: #fff;

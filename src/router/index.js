@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Home = () => import('views/home/Home.vue')
-const User = () => import('views/user/User.vue')
+const UserList = () => import('views/user/UserList.vue')
+const NewUser = () => import('views/user/NewUser.vue')
 const WageList = () => import('views/wage/WageList.vue')
 const NewWage = () => import('views/wage/NewWage.vue')
 const UpdWage = () => import('views/wage/UpdWage.vue')
@@ -29,9 +30,13 @@ const routes = [
     component: Home
   },
   {
-    path: '/user',
-    component: User
+    path: '/userlist',
+    component: UserList
+  },{
+    path: '/newuser',
+    component: NewUser
   },
+  
   {
     path: '/wagelist',
     component: WageList

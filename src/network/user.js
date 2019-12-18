@@ -1,4 +1,6 @@
-import { request } from "./request"
+import {
+  request
+} from "./request"
 
 export function login(username, password) {
   return request({
@@ -8,6 +10,20 @@ export function login(username, password) {
       password
     }
 
+  })
+}
+
+export function createUser(user) {
+  return request({
+    method: 'post',
+    url: '/user/createUser',
+    data: {
+      username: user.username,
+      tel: user.tel,
+      password: user.password,
+      roleId: user.roleId,
+      type: user.type
+    }
   })
 }
 

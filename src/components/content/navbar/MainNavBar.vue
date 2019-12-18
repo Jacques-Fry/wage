@@ -1,16 +1,16 @@
 <template>
   <div class="main-nav-bar">
-    <NavBar class="nav-bar-item" path="/home">
+    <!-- <NavBar class="nav-bar-item" path="/home">
       <i slot="icon" class="el-icon-s-home"></i>
       <span slot="name">首页</span>
-    </NavBar>
+    </NavBar> -->
 
     <NavBar class="nav-bar-item" path="/wagelist">
       <i slot="icon" class="el-icon-notebook-2"></i>
       <span slot="name">工资条</span>
     </NavBar>
 
-    <NavBar class="nav-bar-item" path="/user">
+    <NavBar class="nav-bar-item" path="/userlist">
       <i slot="icon" class="el-icon-user"></i>
       <span slot="name">用户</span>
     </NavBar>

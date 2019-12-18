@@ -23,7 +23,7 @@
         <td>个税</td>
         <td>PAID IN</td>
         <td rowspan="2">
-          <el-button size="mini" type="primary" @click="$emit('look',wage.id)">查看</el-button>
+          <el-button size="mini" type="primary" @click="$emit('look',wage.id)">详情</el-button>
           <el-button size="mini" type="warning" @click="updWage">修改</el-button>
         </td>
       </tr>

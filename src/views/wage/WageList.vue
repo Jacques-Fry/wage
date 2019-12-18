@@ -58,68 +58,139 @@
       ></el-pagination>
     </div>
 
-    <el-dialog title="工资条详情" :visible.sync="centerDialogVisible" width="30%" center>
-      <el-form
-        label-position="right"
-        size="mini"
-        :model="wage"
-        label-width="185px"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="所属年月份: ">{{wage.wageTime}}</el-form-item>
+    <div class="wage-detail">
+      <el-dialog title="工资条详情" :visible.sync="centerDialogVisible" width="30%" center>
+        <table class="wage-table" width="100%">
+          <tr>
+            <th>所属年月份:</th>
+            <td>{{wage.wageTime}}</td>
+          </tr>
 
-        <el-form-item label="员工姓名: ">{{wage.staffName}}</el-form-item>
+          <tr>
+            <th>员工姓名:</th>
+            <td>{{wage.staffName}}</td>
+          </tr>
 
-        <el-form-item label="基本工资: ">{{wage.base}}</el-form-item>
+          <tr>
+            <th>基本工资:</th>
+            <td>{{wage.base | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="上一月度等级: ">{{wage.lastLevel}}</el-form-item>
+          <tr>
+            <th>上一月度等级:</th>
+            <td>{{wage.lastLevel}}</td>
+          </tr>
 
-        <el-form-item label="岗位系数: ">{{wage.postCoefficient}}</el-form-item>
+          <tr>
+            <th>岗位系数:</th>
+            <td>{{wage.postCoefficient}}</td>
+          </tr>
 
-        <el-form-item label="实习: ">{{wage.internship}}</el-form-item>
+          <tr>
+            <th>实习:</th>
+            <td>{{wage.internship}}</td>
+          </tr>
 
-        <el-form-item label="级别系数: ">{{wage.classificationCoefficient}}</el-form-item>
+          <tr>
+            <th>级别系数:</th>
+            <td>{{wage.classificationCoefficient}}</td>
+          </tr>
 
-        <el-form-item label="绩效: ">{{wage.performance}}</el-form-item>
-        <el-form-item label="应到天数: ">{{wage.daysToCome}}</el-form-item>
+          <tr>
+            <th>绩效:</th>
+            <td>{{wage.performance}}</td>
+          </tr>
+          <tr>
+            <th>应到天数:</th>
+            <td>{{wage.daysToCome}}</td>
+          </tr>
 
-        <el-form-item label="事假天数: ">{{wage.affairLeave}}</el-form-item>
+          <tr>
+            <th>事假天数:</th>
+            <td>{{wage.affairLeave}}</td>
+          </tr>
 
-        <el-form-item label="病假天数: ">{{wage.sickLeave}}</el-form-item>
+          <tr>
+            <th>病假天数:</th>
+            <td>{{wage.sickLeave}}</td>
+          </tr>
 
-        <el-form-item label="迟到天数: ">{{wage.late}}</el-form-item>
+          <tr>
+            <th>迟到天数:</th>
+            <td>{{wage.late}}</td>
+          </tr>
 
-        <el-form-item label="缺勤天数: ">{{wage.absenteeismDays}}</el-form-item>
+          <tr>
+            <th>缺勤天数:</th>
+            <td>{{wage.absenteeismDays}}</td>
+          </tr>
 
-        <el-form-item label="出差天数: ">{{wage.evection}}</el-form-item>
+          <tr>
+            <th>出差天数:</th>
+            <td>{{wage.evection}}</td>
+          </tr>
 
-        <el-form-item label="报销费用: ">{{wage.claimExpense}}</el-form-item>
+          <tr>
+            <th>报销费用:</th>
+            <td>{{wage.claimExpense | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="补贴费用: ">{{wage.subsidies}}</el-form-item>
+          <tr>
+            <th>补贴费用:</th>
+            <td>{{wage.subsidies | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="奖金: ">{{wage.bonus}}</el-form-item>
+          <tr>
+            <th>奖金:</th>
+            <td>{{wage.bonus | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="社保: ">{{wage.socialSecurity}}</el-form-item>
+          <tr>
+            <th>社保:</th>
+            <td>{{wage.socialSecurity | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="其他: ">{{wage.other}}</el-form-item>
+          <tr>
+            <th>其他:</th>
+            <td>{{wage.other | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="应发工资: ">{{wage.wagesPayable}}</el-form-item>
+          <tr>
+            <th>应发工资:</th>
+            <td>{{wage.wagesPayable | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="日工资: ">{{wage.dailyWages}}</el-form-item>
+          <tr>
+            <th>日工资:</th>
+            <td>{{wage.dailyWages | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="实发工资: ">{{wage.realWages}}</el-form-item>
+          <tr>
+            <th>实发工资:</th>
+            <td>{{wage.realWages | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="实发补贴: ">{{wage.realSubsidy}}</el-form-item>
+          <tr>
+            <th>实发补贴:</th>
+            <td>{{wage.realSubsidy | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="个税: ">{{wage.incomeTax}}</el-form-item>
+          <tr>
+            <th>个税:</th>
+            <td>{{wage.incomeTax | toFixed2}}</td>
+          </tr>
 
-        <el-form-item label="PAID IN: ">{{wage.paidIn}}</el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button size="small" type="warning" @click="$router.push('/updwage/'+wage.id)">修 改</el-button>
-        <el-button size="small" @click="centerDialogVisible = false">关闭</el-button>
-      </span>
-    </el-dialog>
+          <tr>
+            <th>PAID IN:</th>
+            <td>{{wage.paidIn}}</td>
+          </tr>
+        </table>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="small" type="warning" @click="$router.push('/updwage/'+wage.id)">修 改</el-button>
+          <el-button size="small" @click="centerDialogVisible = false">关闭</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
@@ -199,6 +270,12 @@ export default {
         }
       });
     }
+  },
+  filters: {
+    toFixed2(data) {
+      if(data===undefined) return data
+      return data.toFixed(2);
+    }
   }
 };
 </script>
@@ -260,5 +337,21 @@ export default {
   width: 100%;
   height: 50px;
   background-color: #fff;
+}
+.demo-ruleForm {
+  width: 300px;
+}
+
+.wage-table tr {
+  line-height: 20px;
+}
+.wage-table tr th {
+  width: 50%;
+  text-align: right;
+  padding-right: 10px;
+}
+.wage-table tr td {
+  text-align: left;
+  padding-left: 10px;
 }
 </style>
