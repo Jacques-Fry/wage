@@ -135,7 +135,7 @@
 
           <el-form-item class="form-option">
             <el-button size="small" type="primary" :loading="loading" @click="submitForm">立即提交</el-button>
-            <el-button size="small" @click="resetForm">重置</el-button>
+            <el-button size="small" @click="resetForm">重置全部数据</el-button>
           </el-form-item>
         </el-form>
       </vue-scroll>
@@ -305,12 +305,7 @@ export default {
 
     detailById(this.id).then(res => {
       if (res && res.code === 4000) {
-        this.$message({
-          showClose: true,
-          message: res.data.msg,
-          type: "error"
-        });
-        this.$router.go(-1);
+        this.$router.push("/wagelist");
       }
       if (res && res.code === 200) {
         this.wage = res.data;

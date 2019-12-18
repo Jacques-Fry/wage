@@ -14,8 +14,8 @@ export function request(config) {
   //axios拦截器
   //请求拦截
   instance.interceptors.request.use(config => {
-    console.log(store.getters.getToken)
-    console.log(typeof (store.getters.getToken) == "string")
+    // console.log(store.getters.getToken)
+    // console.log(typeof (store.getters.getToken) == "string")
     if (typeof (store.getters.getToken) == "string" && store.getters.getToken) config.headers['token'] = store.getters.getToken
     return config
   }, err => {
