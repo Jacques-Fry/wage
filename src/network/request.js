@@ -7,7 +7,7 @@ const vue = new Vue()
 export function request(config) {
   //创建axios实例
   const instance = axios.create({
-    baseURL: 'http://192.168.102.251:9001',
+    baseURL: 'http://a.com:9001',
     timeout: 10000
   })
 
@@ -61,4 +61,3 @@ export function request(config) {
   //发送网络请求
   return instance(config)
 }
-

@@ -46,17 +46,17 @@
     <div class="user-content">
       <vue-scroll v-if="userList.length!==0">
         <el-table ref="filterTable" :data="userList" style="width: 100%">
-          <el-table-column prop="id" label="ID" width="50"></el-table-column>
+          <el-table-column prop="id" label="ID" width="80"></el-table-column>
           <el-table-column
             :formatter="dateFormatter"
             prop="createTime"
             label="注册时间"
-            width="130"
+            width="150"
             column-key="createTime"
           ></el-table-column>
-          <el-table-column prop="username" label="用户名" width="120"></el-table-column>
-          <el-table-column :formatter="telFormatter" label="手机号" width="120"></el-table-column>
-          <el-table-column label="账号状态" width="80">
+          <el-table-column prop="username" label="用户名" width="250"></el-table-column>
+          <el-table-column :formatter="telFormatter" label="手机号" width="150"></el-table-column>
+          <el-table-column label="账号状态" width="100">
             <template slot-scope="scope">
               <el-tag
                 :type="statusTag(scope.row.status)"
@@ -66,7 +66,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="角色/权限" width="110" filter-placement="bottom-end">
+          <el-table-column label="角色/权限" width="130" filter-placement="bottom-end">
             <template slot-scope="scope">
               <el-tag :type="roleTag(scope.row.roleId)" disable-transitions>{{scope.row.roleId}}</el-tag>
             </template>
