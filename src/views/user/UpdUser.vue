@@ -4,7 +4,7 @@
       <span class="el-icon-arrow-left"></span> 返回
     </div>
     <div class="user-title">
-      <span>创建用户</span>
+      <span>编辑用户</span>
     </div>
     <div class="user-content">
       <el-form
@@ -27,20 +27,10 @@
         <el-form-item label="确认密码" prop="checkPass">
           <el-input type="password" v-model="user.checkPass" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="用户类型">
-          <el-select v-model="user.type" placeholder="请选择用户类型">
-            <el-option
-              v-for="(item,index) in userTypes"
-              :key="'userTypes'+index"
-              :label="item.name"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </el-form-item>
 
         <el-form-item>
           <el-button type="primary" @click="submitForm()" :loading="loading">立即提交</el-button>
-          <el-button @click="resetForm()">重置数据</el-button>
+          <el-button @click="$router.go(-1)">取消修改</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -49,9 +39,11 @@
 <script>
 import { Loading } from "element-ui";
 
-import { createUser } from "network/user.js";
+import { updUser, detailById } from "network/user.js";
+import { searchAllRole } from "network/role.js";
+
 export default {
-  name: "NewUser",
+  name: "UpdUser",
   data() {
     let reg1 = /^1\d{10}$/;
     let validateTel = (rule, value, callback) => {
@@ -91,16 +83,12 @@ export default {
       }
     };
     return {
-      userTypes: [
-        { name: "普通用户", value: "user" },
-        { name: "管理员", value: "admin" }
-      ],
       user: {
         username: "",
         tel: "",
         password: "",
         checkPass: "",
-        type: "user"
+        roleId: 0
       },
       rules: {
         username: [
@@ -116,39 +104,46 @@ export default {
           { required: true, message: "不允许为空", trigger: "blur" }
         ]
       },
-      loading: false
+      loading: false,
+      id: 0
     };
+  },
+  created() {
+    this.id = this.$route.params.id;
+
+    detailById(this.id).then(res => {
+      if (res && res.code === 4000) {
+        this.$router.push("/userlist");
+      }
+      if (res && res.code === 200) {
+        this.user = res.data;
+      }
+    });
   },
   methods: {
     submitForm() {
       this.$refs["user"].validate(valid => {
         if (valid) {
           this.loading = true;
+
           let loadingInstance = Loading.service();
-          createUser(this.user).then(res => {
+
+          updUser(this.user).then(res => {
             this.loading = false;
+
             this.$nextTick(() => {
               // 以服务的方式调用的 Loading 需要异步关闭
               loadingInstance.close();
             });
+
             if (res && res.code === 200) {
               this.$notify({
                 showClose: true,
                 title: "成功",
-                message: "创建成功",
+                message: "修改成功",
                 type: "success"
               });
-              this.$confirm("创建成功，是否继续创建用户?", "提示", {
-                confirmButtonText: "继续创建",
-                cancelButtonText: "返回列表",
-                type: "warning"
-              })
-                .then(() => {
-                  this.resetForm();
-                })
-                .catch(() => {
-                  this.$router.push("/userlist");
-                });
+              this.$router.push("/userlist");
             }
           });
         } else {

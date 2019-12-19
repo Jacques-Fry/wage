@@ -92,3 +92,10 @@ export function updWage(id, wage) {
 
   })
 }
+
+export function delWage(id) {
+  return request({
+    method: 'delete',
+    url: '/salarySheet/' + id
+  })
+}

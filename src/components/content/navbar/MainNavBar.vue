@@ -14,6 +14,11 @@
       <i slot="icon" class="el-icon-user"></i>
       <span slot="name">用户</span>
     </NavBar>
+
+    <NavBar class="nav-bar-item" path="/detail">
+      <i slot="icon" class="el-icon-star-off"></i>
+      <span slot="name">个人中心</span>
+    </NavBar>
   </div>
 </template>
 

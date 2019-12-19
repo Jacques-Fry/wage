@@ -10,9 +10,9 @@
         label-width="0px"
         class="demo-ruleForm login-page"
       >
-        <h3 class="title">系统登录</h3>
+        <h3 class="title">创羿OA后台系统登录</h3>
         <el-form-item prop="username">
-          <el-input type="text" v-model="user.username" auto-complete="off" placeholder="用户名"></el-input>
+          <el-input type="text" v-model="user.username" auto-complete="off" placeholder="用户名/手机号"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input type="password" v-model="user.password" auto-complete="off" placeholder="密码"></el-input>
@@ -65,6 +65,12 @@ export default {
               detail().then(res => {
                 if (res.code === 200) {
                   this.$store.commit("setUser", res.data);
+                  this.$notify({
+                    showClose: true,
+                    title: "成功",
+                    message: "欢迎来到创羿OA后台",
+                    type: "success"
+                  });
                 }
               });
             }

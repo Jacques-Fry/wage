@@ -4,7 +4,7 @@
       <span class="el-icon-arrow-left"></span> 返回
     </div>
     <div class="wage-title">
-      <span>修改工资条</span>
+      <span>编辑工资条</span>
     </div>
     <div class="wage-form">
       <vue-scroll class="vue-scroll">
@@ -135,7 +135,7 @@
 
           <el-form-item class="form-option">
             <el-button size="small" type="primary" :loading="loading" @click="submitForm">立即提交</el-button>
-            <el-button size="small" @click="resetForm">重置全部数据</el-button>
+            <el-button size="small" @click="$router.go(-1)">取消编辑</el-button>
           </el-form-item>
         </el-form>
       </vue-scroll>
@@ -320,8 +320,9 @@ export default {
           updWage(this.id, this.wage).then(res => {
             this.loading = false;
             if (res && res.code === 200) {
-              this.$message({
+             this.$notify({
                 showClose: true,
+                title: "成功",
                 message: "修改成功",
                 type: "success"
               });

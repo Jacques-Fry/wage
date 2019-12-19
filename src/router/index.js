@@ -4,10 +4,12 @@ import Router from 'vue-router'
 const Home = () => import('views/home/Home.vue')
 const UserList = () => import('views/user/UserList.vue')
 const NewUser = () => import('views/user/NewUser.vue')
+const UpdUser = () => import('views/user/UpdUser.vue')
 const WageList = () => import('views/wage/WageList.vue')
 const NewWage = () => import('views/wage/NewWage.vue')
 const UpdWage = () => import('views/wage/UpdWage.vue')
 const Login = () => import('views/login/Login.vue')
+const Detail = () => import('views/detail/Detail.vue')
 Vue.use(Router)
 
 const routes = [
@@ -19,7 +21,7 @@ const routes = [
   },
   {
     path: '',
-    redirect: '/user'
+    redirect: '/userlist'
   },
   {
     path: '/login',
@@ -32,11 +34,15 @@ const routes = [
   {
     path: '/userlist',
     component: UserList
-  },{
+  }, {
     path: '/newuser',
     component: NewUser
   },
-  
+  {
+    path: '/upduser/:id',
+    name: "upduser",
+    component: UpdUser
+  },
   {
     path: '/wagelist',
     component: WageList
@@ -49,6 +55,11 @@ const routes = [
     path: '/updwage/:id',
     name: "updwage",
     component: UpdWage
+  },
+  {
+    path: '/detail',
+    name: "detail",
+    component: Detail
   }
 
 ]

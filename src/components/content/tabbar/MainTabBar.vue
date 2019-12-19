@@ -9,11 +9,12 @@
       <div class="user-name">
         <el-dropdown>
           <span class="el-dropdown-link">
-            {{user.username}}
+            {{'您好,'+user.username}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu class="el-dropdown-item" slot="dropdown">
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item :disabled="true">超级管理员</el-dropdown-item>
+            <el-dropdown-item @click.native="goDetail">个人中心</el-dropdown-item>
             <el-dropdown-item @click.native="loginOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -45,6 +46,11 @@ export default {
       localStorage.clear();
       this.$store.commit("setToken", "");
       this.$bus.$emit("toLogin");
+    },
+    goDetail() {
+      if (this.$route.path.indexOf("/detail") === -1) {
+        this.$router.push("/detail");
+      }
     }
   }
 };

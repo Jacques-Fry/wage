@@ -186,6 +186,7 @@
           </tr>
         </table>
         <span slot="footer" class="dialog-footer">
+          <el-button size="small" type="danger" @click="delWage(wage.id)">删 除</el-button>
           <el-button size="small" type="warning" @click="$router.push('/updwage/'+wage.id)">修 改</el-button>
           <el-button size="small" @click="centerDialogVisible = false">关闭</el-button>
         </span>
@@ -195,7 +196,7 @@
 </template>
 
 <script type="text/javascript">
-import { salarySheetSearch, detailById } from "network/wage.js";
+import { salarySheetSearch, detailById, delWage } from "network/wage.js";
 
 import { Loading } from "element-ui";
 
@@ -225,12 +226,9 @@ export default {
   mounted() {},
   methods: {
     lookWage(id) {
-      let loadingInstance = Loading.service();
+      let loadingInstance = this.pageLoading();
       detailById(id).then(res => {
-        this.$nextTick(() => {
-          // 以服务的方式调用的 Loading 需要异步关闭
-          loadingInstance.close();
-        });
+        this.pageStopLoading(loadingInstance);
         if (res && res.code === 4000) {
           this.salarySheetSearch();
         }
@@ -241,39 +239,70 @@ export default {
       });
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
       this.pageSize = val;
+      this.currentPage = 1;
       this.salarySheetSearch();
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      // console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.salarySheetSearch();
     },
     salarySheetSearch() {
-      let loadingInstance = Loading.service();
-      this.loading = true;
+      let loadingInstance = this.pageLoading();
       salarySheetSearch(
         this.currentPage,
         this.pageSize,
         this.staffName,
         this.wageTime
       ).then(res => {
-        this.$nextTick(() => {
-          // 以服务的方式调用的 Loading 需要异步关闭
-          loadingInstance.close();
-        });
-        this.loading = false;
+        this.pageStopLoading(loadingInstance);
         if (res && res.code === 200) {
           this.wageList = res.data.rows;
           this.total = res.data.total;
         }
       });
+    },
+    delWage(id) {
+      this.$confirm("确定删除此工资条吗,删除后将不可恢复?", "提示", {
+        confirmButtonText: "确认删除",
+        cancelButtonText: "我点错了",
+        type: "warning"
+      })
+        .then(() => {
+          let loadingInstance = this.pageLoading();
+          delWage(id).then(res => {
+            this.pageStopLoading(loadingInstance);
+            this.centerDialogVisible = false;
+            if (res && res.code === 200) {
+              this.$notify({
+                showClose: true,
+                title: "成功",
+                message: "删除成功",
+                type: "success"
+              });
+            }
+            this.salarySheetSearch();
+          });
+        })
+        .catch(() => {});
+    },
+    pageLoading() {
+      this.loading = true;
+      return Loading.service();
+    },
+    pageStopLoading(loadingInstance) {
+      this.loading = false;
+      this.$nextTick(() => {
+        // 以服务的方式调用的 Loading 需要异步关闭
+        loadingInstance.close();
+      });
     }
   },
   filters: {
     toFixed2(data) {
-      if(data===undefined) return data
+      if (data === undefined) return data;
       return data.toFixed(2);
     }
   }

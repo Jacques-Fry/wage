@@ -8,7 +8,7 @@ export function request(config) {
   //创建axios实例
   const instance = axios.create({
     baseURL: 'http://a.com:9001',
-    timeout: 5000
+    timeout: 10000
   })
 
   //axios拦截器

@@ -24,7 +24,7 @@
         <td>PAID IN</td>
         <td rowspan="2">
           <el-button size="mini" type="primary" @click="$emit('look',wage.id)">详情</el-button>
-          <el-button size="mini" type="warning" @click="updWage">修改</el-button>
+          <el-button size="mini" type="warning" @click="updWage">编辑</el-button>
         </td>
       </tr>
       <tr>
