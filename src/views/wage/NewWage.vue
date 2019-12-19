@@ -27,7 +27,7 @@
             ></el-date-picker>
           </el-form-item>
 
-          <el-form-item label="所属员工" prop="userId">
+          <!-- <el-form-item label="所属员工" prop="userId">
             <el-select v-model="wage.userId" placeholder="请选择">
               <el-option
                 v-for="item in users"
@@ -36,7 +36,7 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item label="员工姓名" prop="staffName">
             <el-input v-model="wage.staffName" autocomplete="off" clearable></el-input>

@@ -29,7 +29,7 @@
         </div>
 
         <div class="option-search">
-          <el-button size="mini" type="primary" icon="el-icon-search" @click="salarySheetSearch">搜索</el-button>
+          <el-button size="mini" type="primary" icon="el-icon-search" @click="queryData">搜索</el-button>
         </div>
       </div>
     </div>
@@ -83,7 +83,7 @@
 
           <tr>
             <th>岗位系数:</th>
-            <td>{{wage.postCoefficient}}</td>
+            <td>{{wage.postCoefficient | toFixed2}}</td>
           </tr>
 
           <tr>
@@ -93,12 +93,12 @@
 
           <tr>
             <th>级别系数:</th>
-            <td>{{wage.classificationCoefficient}}</td>
+            <td>{{wage.classificationCoefficient | toFixed2}}</td>
           </tr>
 
           <tr>
             <th>绩效:</th>
-            <td>{{wage.performance}}</td>
+            <td>{{wage.performance | toFixed2}}</td>
           </tr>
           <tr>
             <th>应到天数:</th>
@@ -182,7 +182,17 @@
 
           <tr>
             <th>PAID IN:</th>
-            <td>{{wage.paidIn}}</td>
+            <td>{{wage.paidIn | toFixed2}}</td>
+          </tr>
+
+          <tr>
+            <th>创建时间:</th>
+            <td>{{wage.createTime | timeFilter}}</td>
+          </tr>
+
+          <tr>
+            <th>最后一次修改时间:</th>
+            <td>{{wage.updateTime | timeFilter}}</td>
           </tr>
         </table>
         <span slot="footer" class="dialog-footer">
@@ -199,6 +209,8 @@
 import { salarySheetSearch, detailById, delWage } from "network/wage.js";
 
 import { Loading } from "element-ui";
+
+import { formatDate } from "common/utils.js";
 
 import SalarySheet from "components/content/salarysheet/SalarySheet";
 export default {
@@ -247,6 +259,10 @@ export default {
     handleCurrentChange(val) {
       // console.log(`当前页: ${val}`);
       this.currentPage = val;
+      this.salarySheetSearch();
+    },
+    queryData() {
+      this.currentPage = 1;
       this.salarySheetSearch();
     },
     salarySheetSearch() {
@@ -304,6 +320,10 @@ export default {
     toFixed2(data) {
       if (data === undefined) return data;
       return data.toFixed(2);
+    },
+    timeFilter(value) {
+      if (!value) return "暂无";
+      else return formatDate(new Date(value), "yyyy年MM月dd日 hh:mm");
     }
   }
 };

@@ -37,7 +37,7 @@
             size="mini"
             type="primary"
             icon="el-icon-search"
-            @click="searchUser"
+            @click="queryData"
           >搜索</el-button>
         </div>
       </div>
@@ -46,17 +46,17 @@
     <div class="user-content">
       <vue-scroll v-if="userList.length!==0">
         <el-table ref="filterTable" :data="userList" style="width: 100%">
-          <el-table-column prop="id" label="ID" width="100"></el-table-column>
+          <el-table-column prop="id" label="ID" width="50"></el-table-column>
           <el-table-column
             :formatter="dateFormatter"
             prop="createTime"
             label="注册时间"
-            width="200"
+            width="130"
             column-key="createTime"
           ></el-table-column>
-          <el-table-column prop="username" label="用户名" width="250"></el-table-column>
-          <el-table-column :formatter="telFormatter" label="手机号" width="200"></el-table-column>
-          <el-table-column label="账号状态" width="150">
+          <el-table-column prop="username" label="用户名" width="120"></el-table-column>
+          <el-table-column :formatter="telFormatter" label="手机号" width="120"></el-table-column>
+          <el-table-column label="账号状态" width="80">
             <template slot-scope="scope">
               <el-tag
                 :type="statusTag(scope.row.status)"
@@ -66,7 +66,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="角色" width="150" filter-placement="bottom-end">
+          <el-table-column label="角色/权限" width="110" filter-placement="bottom-end">
             <template slot-scope="scope">
               <el-tag :type="roleTag(scope.row.roleId)" disable-transitions>{{scope.row.roleId}}</el-tag>
             </template>
@@ -199,7 +199,7 @@ export default {
       this.searchUser();
     },
     dateFormatter(row, column) {
-      return formatDate(new Date(row.createTime), "yyyy-MM-dd");
+      return formatDate(new Date(row.createTime), "yyyy年MM月dd日");
     },
     telFormatter(row, column) {
       return row.tel || "暂无";
@@ -217,7 +217,12 @@ export default {
       if (roleName === "管理员") return "";
       return "info";
     },
+    queryData() {
+      this.currentPage = 1;
+      this.searchUser();
+    },
     searchUser() {
+      this.currentPage = 1;
       let loadingInstance = this.pageLoading();
       searchUser(
         this.currentPage,
