@@ -21,7 +21,7 @@
             value-f
             v-model="wageTime"
             format="yyyy年MM月"
-            value-format="yyyy年MM月"
+            value-format="yyyy-MM"
             type="month"
             placeholder="工资所属月份"
             :loading="loading"
@@ -63,7 +63,7 @@
         <table class="wage-table" width="100%">
           <tr>
             <th>所属年月份:</th>
-            <td>{{wage.wageTime}}</td>
+            <td>{{wage.wageTime | timeFilter2}}</td>
           </tr>
 
           <tr>
@@ -324,6 +324,10 @@ export default {
     timeFilter(value) {
       if (!value) return "暂无";
       else return formatDate(new Date(value), "yyyy年MM月dd日 hh:mm");
+    },
+    timeFilter2(value) {
+      if (!value) return "未知";
+      else return formatDate(new Date(value), "yyyy年MM月");
     }
   }
 };

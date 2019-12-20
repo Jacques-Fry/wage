@@ -3,7 +3,7 @@
     <table>
       <tr>
         <th>员工姓名</th>
-        <th colspan="13">{{wage.wageTime}}</th>
+        <th colspan="13">{{wage.wageTime | timeFilter2}}</th>
         <th>操作</th>
       </tr>
 
@@ -47,6 +47,7 @@
 </template>
 
 <script type="text/javascript">
+import { formatDate } from "common/utils.js";
 export default {
   name: "SalarySheet",
   data() {
@@ -70,6 +71,10 @@ export default {
   filters: {
     toFixed2(data) {
       return data.toFixed(2);
+    },
+    timeFilter2(value) {
+      if (!value) return "未知";
+      else return formatDate(new Date(value), "yyyy年MM月");
     }
   }
 };

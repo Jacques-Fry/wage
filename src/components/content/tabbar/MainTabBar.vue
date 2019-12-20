@@ -4,16 +4,18 @@
     <div slot="tab-bar-center"></div>
     <div class="tab-bar-right" slot="tab-bar-right">
       <div>
-        <el-avatar class="user-head-portrait" icon="el-icon-user-solid"></el-avatar>
+        <!-- <el-avatar class="user-head-portrait" icon="el-icon-user-solid"></el-avatar>
+         -->
+         <el-avatar  class="user-head-portrait" > 创羿 </el-avatar>
       </div>
       <div class="user-name">
         <el-dropdown>
           <span class="el-dropdown-link">
-            {{'您好,'+user.username}}
+            {{'您好，'+user.username}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu class="el-dropdown-item" slot="dropdown">
-            <el-dropdown-item :disabled="true">超级管理员</el-dropdown-item>
+            <el-dropdown-item :disabled="true">{{user.roleName}}</el-dropdown-item>
             <el-dropdown-item @click.native="goDetail">个人中心</el-dropdown-item>
             <el-dropdown-item @click.native="loginOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>

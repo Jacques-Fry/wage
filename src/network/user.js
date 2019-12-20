@@ -12,6 +12,12 @@ export function searchUser(page, size, username, tel, roleId) {
   })
 }
 
+export function findAll() {
+  return request({
+    url: '/user/findAll',
+  })
+}
+
 export function login(username, password) {
   return request({
     url: '/user/login',

@@ -20,23 +20,23 @@
           <el-form-item label="所属年月份" prop="wageTime">
             <el-date-picker
               format="yyyy年MM月"
-              value-format="yyyy年MM月"
+              value-format="yyyy-MM-dd"
               v-model="wage.wageTime"
               type="month"
               placeholder="月份"
             ></el-date-picker>
           </el-form-item>
 
-          <!-- <el-form-item label="所属员工" prop="userId">
+          <el-form-item label="所属用户" prop="userId">
             <el-select v-model="wage.userId" placeholder="请选择">
               <el-option
                 v-for="item in users"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="'users'+item.id"
+                :label="item.username"
+                :value="item.id"
               ></el-option>
             </el-select>
-          </el-form-item>-->
+          </el-form-item>
 
           <el-form-item label="员工姓名" prop="staffName">
             <el-input v-model="wage.staffName" autocomplete="off" clearable></el-input>
@@ -144,6 +144,8 @@
 </template>
 
 <script type="text/javascript">
+import { formatDate } from "common/utils";
+import { findAll } from "network/user.js";
 import { createWage, updWage, detailById } from "network/wage.js";
 export default {
   name: "UpdWage",
@@ -164,7 +166,7 @@ export default {
       if (value === "") {
         callback(new Error("不允许为空"));
       } else if (!reg2.test(value)) {
-        callback(new Error("数值不规范,只允许至多两位小数"));
+        callback(new Error("数值不规范,只允许至多两位小数,整数前请不要有0"));
       } else {
         callback();
       }
@@ -211,6 +213,7 @@ export default {
         staffName: [
           { required: true, message: "员工姓名不能为空", trigger: "blur" }
         ],
+        userId: [{ required: true, message: "所属员工必填", trigger: "blur" }], //所属员工
         base: [
           { validator: math2Verify, trigger: "blur" },
           { required: true, message: "不允许为空", trigger: "blur" }
@@ -309,6 +312,13 @@ export default {
       }
       if (res && res.code === 200) {
         this.wage = res.data;
+        this.wage.wageTime =this.timeFilter2(this.wage.wageTime);
+      }
+    });
+
+    findAll().then(res => {
+      if (res && res.code === 200) {
+        this.users = res.data;
       }
     });
   },
@@ -342,6 +352,10 @@ export default {
     },
     resetForm() {
       this.$refs["wage"].resetFields();
+    },
+    timeFilter2(value) {
+      if (!value) return "未知";
+      else return formatDate(new Date(value), "yyyy-MM-dd");
     }
   }
 };
@@ -381,7 +395,7 @@ export default {
   position: relative;
   display: inline-block;
 
-  width: 400px;
+  width: 500px;
   height: calc(100% - 60px);
 
   background-color: #fff;
@@ -395,7 +409,7 @@ export default {
   text-align: left;
 }
 .el-form-item {
-  width: 350px;
+  width: 450px;
 
   margin: 15px 0;
 }

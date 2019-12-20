@@ -47,12 +47,8 @@ export default {
   data() {
     let reg1 = /^1\d{10}$/;
     let validateTel = (rule, value, callback) => {
-      if (value !== "") {
-        if (!reg1.test(value)) {
-          callback("手机号必须为11位");
-        } else {
-          callback();
-        }
+      if (!reg1.test(value)) {
+        callback("手机号必须为11位");
       } else {
         callback();
       }
@@ -94,7 +90,10 @@ export default {
         username: [
           { required: true, message: "用户名不允许为空", trigger: "blur" }
         ],
-        tel: [{ validator: validateTel, trigger: "blur" }],
+        tel: [
+          { validator: validateTel, trigger: "blur" },
+          { required: true, message: "不允许为空", trigger: "blur" }
+        ],
         password: [
           { validator: validatePassword, trigger: "blur" },
           { required: true, message: "不允许为空", trigger: "blur" }
