@@ -222,7 +222,6 @@ export default {
       this.searchUser();
     },
     searchUser() {
-      this.currentPage = 1;
       let loadingInstance = this.pageLoading();
       searchUser(
         this.currentPage,
