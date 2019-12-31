@@ -1,18 +1,7 @@
 # wage(原创)
 
-### 项目安装
-```
-npm install
-```
+前后端均由本人完成,目前完成功能:  
 
-### 项目部署
-```
-npm run serve
-```
-
-### 项目打包
-```
-npm run build
-```
+用户、工资条
 
 [项目地址](http://transee.net:13539)

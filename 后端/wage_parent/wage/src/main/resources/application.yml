@@ -1,0 +1,27 @@
+server: 
+  port: 9001
+spring: 
+  application:  
+    name: wage #指定服务名
+  datasource:  
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.100.181:3306/wage_cms?characterEncoding=utf-8
+    username: root
+    password: root
+  jpa: 
+    database: MySQL
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  jackson:
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: true #返回时间戳
+    default-property-inclusion: non_null #null值不返回
+logging:
+  config: classpath:log4j2.yml # 指定log4j配置文件的位置
+jwt:
+  config:
+    key: jack_yd
+    ttl: 86400000
+
